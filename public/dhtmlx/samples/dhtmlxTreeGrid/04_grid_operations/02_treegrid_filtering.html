@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Search and Filtering in TreeGrid</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<link rel="stylesheet" type="text/css" href="../../../codebase/dhtmlx.css"/>
+	<script src="../../../codebase/dhtmlx.js"></script>
+	<style>
+		div.gridbox div.ftr td{
+			text-align:right;
+		}
+		div.gridbox table.hdr td {
+			font-weight:bold;
+		}
+	</style>
+	<script>
+		var myTreeGrid;
+		function doOnLoad() {
+			myTreeGrid = new dhtmlXGridObject('gridbox');
+			myTreeGrid.setImagePath("../../../codebase/imgs/");
+			myTreeGrid.setIconsPath("../common/images/");
+			myTreeGrid.setHeader("Search, Text Filter, Select Filter");
+			myTreeGrid.attachHeader("#text_search,#text_filter,#select_filter");
+			myTreeGrid.setInitWidths("300,120,*");
+			myTreeGrid.setColAlign("left,right,right");
+			myTreeGrid.setColTypes("tree,price,ed");
+			myTreeGrid.setColSorting("str,int,int");
+			myTreeGrid.init();
+			myTreeGrid.setSkin("dhx_skyblue");
+			myTreeGrid.loadXML("../common/treegrid_sample1.xml");
+		}
+	</script>
+</head>
+<body onload="doOnLoad();">
+	<h1>Search and Filtering in TreeGrid</h1>
+	<p>TreeGrid supports filtering. You can set search box, text or select filters for each column.</p>
+	By <select onchange="myTreeGrid.setFiltrationLevel(this.value)"><option value="-1" selected="true">last level<option value="1">second level</select> ( affect filters only )
+	<table width="550">
+		<tr>
+			<td>
+				<div id="gridbox" width="100%" height="327px" style="background-color:white;"></div>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

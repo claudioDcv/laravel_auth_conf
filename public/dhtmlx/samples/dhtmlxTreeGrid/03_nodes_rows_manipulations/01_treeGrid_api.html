@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Grid related API</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<link rel="stylesheet" type="text/css" href="../../../codebase/dhtmlx.css"/>
+	<script src="../../../codebase/dhtmlx.js"></script>
+	<script>
+		var myTreeGrid;
+		function doOnLoad() {
+			myTreeGrid = new dhtmlXGridObject('gridbox');
+			myTreeGrid.setImagePath("../../../codebase/imgs/");
+			myTreeGrid.setHeader("Car,Mileage,Volume,State A,State B");
+			myTreeGrid.setInitWidths("150,100,100,50,50");
+			myTreeGrid.setColAlign("left,left,left,center,center");
+			myTreeGrid.setColTypes("tree,ed,txt,ch,ch");
+			myTreeGrid.setColSorting("str,str,str,na,str");
+			myTreeGrid.init();
+			myTreeGrid.setSkin("dhx_skyblue");
+			myTreeGrid.loadXML("../common/test_list_1.xml");
+		}
+	</script>
+</head>
+<body onload="doOnLoad();">
+	<h1>Grid related API</h1>
+	<p>Use same methods in Grid and TreeGrid</p>
+	<table width="700">
+		<tr>
+			<td width="50%" valign="top">
+				<div id="gridbox" style="width:350px;height:150px;background-color:white;"></div>
+			</td>
+			<td valign="top">
+				<div id="gridbox2" style="width:350px;height:150px;background-color:white;border:1px solid blue;" align="right"></div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2"><table><tr>
+				<td>
+					<a href="javascript:myTreeGrid.setHeaderCol(1,'New Header')">setHeaderCol</a><br>
+					<a href="javascript:myTreeGrid.copyRowContent(myTreeGrid.getRowId(0),myTreeGrid.getSelectedId())">copyRowContent (ex.:from first to selected)</a><br>
+					<a href="javascript:myTreeGrid.clearSelection()">clearSelection</a><br>
+					<a href="javascript:myTreeGrid.setSelectedRow(myTreeGrid.getRowId(1))">setSelectedRow (ex.:second)</a><br>
+					<a href="javascript:myTreeGrid.setEditable(!myTreeGrid.isEditable)">setEditable (ex.:on/off)</a><br>
+					<a href="javascript:myTreeGrid.setUserData(myTreeGrid.getSelectedId(),'ud2','this value was set with script')">setUserData (ex.: to selected row)</a><br>
+					<a href="javascript:alert(myTreeGrid.getUserData(myTreeGrid.getSelectedId(),'ud2'))">getUserData (ex.: of selected row)</a><br>
+
+					<a href="javascript:myTreeGrid.moveRowDown(myTreeGrid.getSelectedId())">moveRowDown (ex.:selected)</a><br>
+					<a href="javascript:myTreeGrid.moveRowUp(myTreeGrid.getSelectedId())">moveRowUp (ex.:selected)</a><br>
+					<a href="javascript:alert(myTreeGrid.getColumnCount())">getColumnCount</a><br>
+					<a href="javascript:alert(myTreeGrid.getRowsNum())">getRowsNum</a><br>
+					<a href="javascript:alert(myTreeGrid.getAllItemIds())">getAllItemIds</a><br>
+					<a href="javascript:alert(myTreeGrid.isItemExists('14'))">isItemExists (with id=14)</a><br>
+					<a href="javascript:myTreeGrid.setRowTextStyle(myTreeGrid.getSelectedId(),'color:red;font-family:verdana;font-size:14px;')">setRowTextStyle (ex.:selected)</a><br>
+					<a href="javascript:myTreeGrid.setRowTextBold(myTreeGrid.getSelectedId())">setRowTextBold (ex.:selected)</a><br>
+					<a href="javascript:myTreeGrid.setRowTextNormal(myTreeGrid.getSelectedId())">setRowTextNormal (ex.:selected)</a><br>
+					<a href="javascript:myTreeGrid.clearAll()">clearAll</a><br>
+				</td>
+				<td>
+					<a href="javascript:myTreeGrid.setColumnIds('A,B')">setColumnIds (A,B)</a><br>
+					<a href="javascript:alert(myTreeGrid.getColumnId(0))">getColumnId (ex.:first)</a><br>
+					<a href="javascript:alert(myTreeGrid.getColIndexById('B'))">getColIndexById (ex.: B)</a><br>
+					<a href="javascript:myTreeGrid.setRowId(myTreeGrid.getRowIndex(myTreeGrid.getSelectedId()),'newid')">setRowId (ex.: selected)</a><br>
+					<a href="javascript:alert(myTreeGrid.getRowId(myTreeGrid.getRowIndex(myTreeGrid.getSelectedId())))">getRowId (ex.:selected)</a><br>
+					<a href="javascript:alert(myTreeGrid.getRowIndex(myTreeGrid.getSelectedId()))">getRowIndex (ex.:selected)</a><br>
+					<a href="javascript:alert(myTreeGrid.getColWidth(myTreeGrid.getSelectedCellIndex()))">getColWidth (ex.:of selected cell)</a><br>
+					<a href="javascript:alert(myTreeGrid.getSelectedCellIndex())">getSelectedCellIndex</a><br>
+					<a href="javascript:alert(myTreeGrid.getSelectedId())">getSelectedId</a><br>
+					<a href="javascript:myTreeGrid.deleteSelectedItem()">deleteSelectedItem</a><br>
+					<a href="javascript:void(0)" onclick="myTreeGrid.deleteRow(myTreeGrid.getSelectedId())">deleteRow (ex.: selected)</a><br>
+					<a href="javascript:myTreeGrid.setMultiselect(!myTreeGrid.selMultiRows)">setMultiselect (on/off)</a><br>
+					<a href="javascript:myTreeGrid.selectRow(0)">selectRow (ex.:first one)</a><br>
+					<a href="javascript:myTreeGrid.selectCell(1,1)">selectCell (ex.: second cell of second row)</a><br>
+					<a href="javascript:myTreeGrid.attachToObject(document.getElementById('gridbox2'))">attachToObject</a><br>
+				</td>
+			</tr></table></td>
+		</tr>
+	</table>
+</body>
+</html>

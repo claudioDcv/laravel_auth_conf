@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Smart Parsing</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<link rel="stylesheet" type="text/css" href="../../../codebase/dhtmlx.css"/>
+	<script src="../../../codebase/dhtmlx.js"></script>
+	<script>
+		var myTreeGrid;
+		function doOnLoad() {
+			myTreeGrid = new dhtmlXGridObject('gridbox');
+			myTreeGrid.setImagePath("../../../codebase/imgs/");
+			myTreeGrid.setHeader("Car,Mileage,Volume,State A,State B");
+			myTreeGrid.setInitWidths("*,100,80,60,60");
+			myTreeGrid.setColAlign("left,left,left,center,center");
+			myTreeGrid.setColTypes("tree,ed,txt,ch,ch");
+			myTreeGrid.setColSorting("str,str,str,na,str");
+			myTreeGrid.enableCollSpan(true);
+			myTreeGrid.enableSmartXMLParsing(true);
+			myTreeGrid.setSkin("dhx_skyblue");
+			myTreeGrid.init();
+			myTreeGrid.loadXML("php/tree_grid.php");
+		}
+	</script>
+</head>
+<body onload="doOnLoad();">
+	<h1>Smart parsing in dhtmlxTreeGrid</h1>
+	<p>Smart parsing can increase performance of the TreeGrid control when you have a lot of nodes and levels in it. <br>
+		Current sample demonstrates loading of 1700 nodes on 4 levels. There is no need to change anything on server side.</p>
+	<div id="gridbox" width="600px" height="200px"></div>
+	<br>Enabling Smart XML Parsing with script
+</body>
+</html>

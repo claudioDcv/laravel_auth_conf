@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Repopulation TreeGrid</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<link rel="stylesheet" type="text/css" href="../../../codebase/dhtmlx.css"/>
+	<script src="../../../codebase/dhtmlx.js"></script>
+	<script>
+		var myTreeGrid;
+		function doOnLoad() {
+			myTreeGrid = new dhtmlXGridObject('gridbox');
+			myTreeGrid.setImagePath("../../../codebase/imgs/");
+			myTreeGrid.setHeader("Tree,Plain Text,Long Text,Color,Checkbox");
+			myTreeGrid.setInitWidths("150,100,100,100,100");
+			myTreeGrid.setColAlign("left,left,left,left,center");
+			myTreeGrid.setColTypes("tree,ed,txt,ch,ch");
+			myTreeGrid.setColSorting("str,str,str,na,str");
+			myTreeGrid.init();
+			myTreeGrid.setSkin("dhx_skyblue");
+			myTreeGrid.loadXML("../common/test_list_1.xml");
+		}
+	</script>
+</head>
+<body onload="doOnLoad();">
+	<h1>Repopulation TreeGrid</h1>
+	<p>Empty TreeGrid and repopulate it with xml or script</p>
+	<table width="574">
+		<tr>
+			<td>
+				<div id="gridbox" width="100%" height="150px" style="background-color:white;"></div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div id="gridtbl1" width="100%" height="200px" style="background-color:white;"></div><br>
+				<div><a href="#" onclick="myTreeGrid.clearAll()">Clear all</a></div>
+				<div><a href="#" onclick="myTreeGrid.loadXML('../common/test_list_1.xml');">Reload XML</a></div>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

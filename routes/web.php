@@ -18,3 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/scheduler', 'HomeController@scheduler')->name('scheduler');
+
+Route::match(['get', 'post'], '/scheduler_data', "SchedulerController@data");

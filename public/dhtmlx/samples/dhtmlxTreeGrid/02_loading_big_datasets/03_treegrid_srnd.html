@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Smart Rendering in dhtmlxTreeGrid</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<link rel="stylesheet" type="text/css" href="../../../codebase/dhtmlx.css"/>
+	<script src="../../../codebase/dhtmlx.js"></script>
+	<script>
+		var myTreeGrid;
+		function doOnLoad() {
+			myTreeGrid = new dhtmlXGridObject('gridbox');
+			myTreeGrid.setImagePath("../../../codebase/imgs/");
+			myTreeGrid.setHeader("Column A,Column B,Column C");
+			myTreeGrid.setInitWidths("*,100,80");
+			myTreeGrid.setColAlign("left,left,left");
+			myTreeGrid.setColTypes("tree,ed,txt");
+			myTreeGrid.setColSorting("str,str,str");
+			myTreeGrid.enableSmartRendering(1);
+			myTreeGrid.init();
+			myTreeGrid.setSkin("dhx_skyblue");
+			myTreeGrid.loadXML("../common/smartrend.xml");
+		}
+		function selectAndShow(id){
+			myTreeGrid.selectRowById(id);
+			myTreeGrid.openItem(myTreeGrid.getParentId(id));
+			myTreeGrid.showRow(id);
+		}
+	</script>
+</head>
+<body onload="doOnLoad();">
+	<h1>Smart Rendering in dhtmlxTreeGrid</h1>
+	<p>Smart Rendering functionality allows to increase performance of the TreeGrid, when it has a lot of nodes per level.<br/>First two items in this sample have 500 child nodes.</p>
+	<div id="gridbox" width="500px" height="200px"></div>
+	<a href="javascript:void(0)" onclick='selectAndShow("r0_255")'>Select 255th child of the first item</a><br/>
+	<a href="javascript:void(0)" onclick='selectAndShow("r0_455");'>Select 455th child of the first item</a><br/>
+	<a href="javascript:void(0)" onclick='selectAndShow("r1_200");'>Select 200th child of the second item</a><br/>
+</body>
+</html>

@@ -8,9 +8,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Home') }}</title>
 
     <!-- Styles -->
+    <!-- <link rel="stylesheet" href="{{ asset('dhtmlxScheduler_v4.4.0/codebase/dhtmlxscheduler.css') }}" type="text/css"> -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -29,7 +30,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ config('app.name', 'Home') }}
                     </a>
                 </div>
 
@@ -44,7 +45,7 @@
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <li><a href="{{ route('register') }}">Registrarce</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -75,6 +76,7 @@
     </div>
 
     <!-- Scripts -->
+    <!-- <script src="{{ asset('dhtmlxScheduler_v4.4.0/codebase/dhtmlxscheduler.js') }}" type="text/javascript"></script> -->
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Paging in dhtmlxTreeGrid</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<link rel="stylesheet" type="text/css" href="../../../codebase/dhtmlx.css"/>
+	<script src="../../../codebase/dhtmlx.js"></script>
+	<script>
+		var myTreeGrid;
+		function doOnLoad() {
+			myTreeGrid = new dhtmlXGridObject('gridbox');
+			myTreeGrid.setImagePath("../../../codebase/imgs/");
+			myTreeGrid.setHeader("Column A,Column B,Column C");
+			myTreeGrid.setInitWidths("*,100,80");
+			myTreeGrid.setColAlign("left,left,left");
+			myTreeGrid.setColTypes("tree,ed,txt");
+			myTreeGrid.setColSorting("str,str,str");
+			myTreeGrid.enablePaging(true,10,5,"recinfoArea");
+			myTreeGrid.setPagingSkin("bricks");
+			myTreeGrid.init();
+			myTreeGrid.setSkin("dhx_skyblue");
+			myTreeGrid.loadXML("php/tree_grid.php");
+		}
+	</script>
+</head>
+<body onload="doOnLoad();">
+	<h1>Paging in dhtmlxTreeGrid</h1>
+	<table width="500" cellpadding="0" cellspacing="0">
+		<tr>
+			<td>
+				<div id="gridbox" width="100%" height="200px" style="background-color:white;overflow:hidden"></div>
+			</td>
+		</tr>
+		<tr>
+			<td id="recinfoArea"></td>
+		</tr>
+	</table>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dynamic loading of sub items </title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<link rel="stylesheet" type="text/css" href="../../../codebase/dhtmlx.css"/>
+	<script src="../../../codebase/dhtmlx.js"></script>
+	<script>
+		var myTreeGrid;
+		function doOnLoad() {
+			myTreeGrid = new dhtmlXGridObject('gridbox');
+			myTreeGrid.setImagePath("../../../codebase/imgs/");
+			myTreeGrid.setHeader("Tree,Plain Text,Long Text,Color,Checkbox");
+			myTreeGrid.setInitWidths("150,100,100,100,100");
+			myTreeGrid.setColAlign("left,left,left,left,center");
+			myTreeGrid.setColTypes("tree,ed,txt,ch,ch");
+			myTreeGrid.setColSorting("str,str,str,na,str");
+			myTreeGrid.init();
+			myTreeGrid.enableAutoHeight(true,"150");
+			myTreeGrid.setSkin("dhx_skyblue");
+			myTreeGrid.kidsXmlFile = "../common/test_list_2.xml";
+			myTreeGrid.loadXML("../common/test_list_1.xml");
+		}
+	</script>
+</head>
+<body onload="doOnLoad();">
+	<h1>Dynamic loading of sub items </h1>
+	<p>Loading time is decreased using dynamical loading of children elements</p>
+	<div id="gridbox" width="570px" height="150px" style="background-color:white;"></div>
+</body>
+</html>

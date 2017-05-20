@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TreeGrid initialization</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<link rel="stylesheet" type="text/css" href="../../../codebase/dhtmlx.css"/>
+	<script src="../../../codebase/dhtmlx.js"></script>
+	<script>
+		var myTreeGrid;
+		function doOnLoad() {
+			myTreeGrid = new dhtmlXGridObject('gridbox');
+			myTreeGrid.setImagePath("../../../codebase/imgs/");
+			myTreeGrid.setHeader("Tree,Plain Text,Text,Check 1,Check 2");
+			myTreeGrid.setInitWidths("150,100,100,100,100");
+			myTreeGrid.setColAlign("left,left,left,left,center");
+			myTreeGrid.setColTypes("tree,ed,txt,ch,ch");
+			myTreeGrid.setColSorting("str,str,str,na,str");
+			myTreeGrid.init();
+			myTreeGrid.setSkin("dhx_skyblue");
+			myTreeGrid.loadXML("../common/test_list_1.xml");
+		}
+	</script>
+</head>
+<body onload="doOnLoad();">
+	<h1>TreeGrid initialization</h1>
+	<p>TreeGrid is initialized via script and populated from xml source</p>
+	<div id="gridbox" style="width:570px;height:137px;background-color:white;"></div>
+</body>
+</html>

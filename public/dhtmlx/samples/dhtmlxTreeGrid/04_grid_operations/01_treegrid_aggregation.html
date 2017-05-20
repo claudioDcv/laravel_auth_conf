@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Aggregation in TreeGrid</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<link rel="stylesheet" type="text/css" href="../../../codebase/dhtmlx.css"/>
+	<script src="../../../codebase/dhtmlx.js"></script>
+	<style>
+		div.gridbox div.ftr td {
+			text-align:right;
+			background-color:#E7F0FF;
+		}
+	</style>
+	<script>
+		var myTreeGrid, myTreeGrid1;
+		function doOnLoad() {
+			//background-color:#ffcc66;
+			myTreeGrid = new dhtmlXGridObject('gridbox');
+			myTreeGrid.setImagePath("../../../codebase/imgs/");
+			myTreeGrid.setIconsPath("../common/images/");
+			myTreeGrid.setHeader("Title,Price,Quantity");
+			myTreeGrid.setInitWidths("200,62,*");
+			myTreeGrid.setColAlign("left,right,right");
+			myTreeGrid.setColTypes("tree,price,ed");
+			myTreeGrid.setColSorting("str,int,int");
+			//myTreeGrid.setColumnColor("#d5f1ff")
+			myTreeGrid.init();
+			myTreeGrid.setSkin("dhx_skyblue");
+			myTreeGrid.loadXML("../common/treegrid_sample.xml");
+			myTreeGrid.attachFooter('Total:,${#stat_tree_total},{#stat_tree_total}');
+			myTreeGrid.attachFooter('Multi total:,${#stat_tree_multi_total}1:2,{#stat_tree_multi_total}1:2');
+			myTreeGrid.attachFooter('Maximum:,${#stat_tree_max},{#stat_tree_max}');
+			myTreeGrid.attachFooter('Minimum:,${#stat_tree_min},{#stat_tree_min}');
+			myTreeGrid.attachFooter('Average:,${#stat_tree_average},{#stat_tree_average}');
+			myTreeGrid.attachFooter('Count:,{#stat_tree_count},#cspan');
+			
+			myTreeGrid1 = new dhtmlXGridObject('gridbox1');
+			myTreeGrid1.setImagePath("../../../codebase/imgs/");
+			myTreeGrid1.setIconsPath("../common/images/");
+			myTreeGrid1.setHeader("Title,Price,Quantity");
+			myTreeGrid1.setInitWidths("200,62,*");
+			myTreeGrid1.setColAlign("left,right,right");
+			myTreeGrid1.setColTypes("tree,price,ed");
+			myTreeGrid1.setColSorting("str,int,int");
+			myTreeGrid1.init();
+			myTreeGrid1.setSkin("dhx_skyblue");
+			myTreeGrid1.loadXML("../common/treegrid_sample.xml");
+			myTreeGrid1.attachFooter('Total leaves:,${#stat_tree_total_leaf},{#stat_tree_total_leaf}');
+			myTreeGrid1.attachFooter('Multi total leaves:,${#stat_tree_multi_total_leaf}1:2,{#stat_tree_multi_total_leaf}1:2');
+			myTreeGrid1.attachFooter('Maximum leaves:,${#stat_tree_max_leaf},{#stat_tree_max_leaf}');
+			myTreeGrid1.attachFooter('Minimum leaves:,${#stat_tree_min_leaf},{#stat_tree_min_leaf}');
+			myTreeGrid1.attachFooter('Average leaves:,${#stat_tree_average_leaf},{#stat_tree_average_leaf}');
+			myTreeGrid1.attachFooter('Count leaves:,{#stat_tree_count_leaf},#cspan');
+		}
+	</script>
+</head>
+<body onload="doOnLoad();">
+	<h1>Aggregation in TreeGrid</h1>
+	<p>TreeGrid allows to calculate a sum, an average, a minimum and a maximum of each column.</p>
+	<table style="width:835px;table-layout:fixed;">
+		<tr>
+			<td>
+				<div id="gridbox" width="320px" height="390px" style="background-color:white;"></div>
+			</td>
+			<td>
+				<div id="gridbox1" width="320px" height="390px" style="background-color:white;"></div>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

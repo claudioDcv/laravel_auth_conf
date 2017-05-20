@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Math calculations</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<link rel="stylesheet" type="text/css" href="../../../codebase/dhtmlx.css"/>
+	<script src="../../../codebase/dhtmlx.js"></script>
+	<script>
+		var myTreeGrid;
+		function doOnLoad() {
+			myTreeGrid = new dhtmlXGridObject('gridbox');
+			myTreeGrid.setImagePath("../../../codebase/imgs/");
+			myTreeGrid.setIconsPath("../common/images/");
+			myTreeGrid.setHeader("Title,Price,Quantity,Total");
+			myTreeGrid.setInitWidths("*,70,120,120");
+			myTreeGrid.setColAlign("left,right,right,right");
+			myTreeGrid.setColTypes("tree,price,ed[=sum],price[=sum]");
+			myTreeGrid.setColSorting("str,int,int,int");
+			myTreeGrid.setMathRound(2);
+			myTreeGrid.init();
+			myTreeGrid.setSkin("dhx_skyblue");
+			myTreeGrid.loadXML("../common/grid_math3.xml");
+		}
+	</script>
+</head>
+<body onload="doOnLoad();">
+	<h1>Custom output with math calculations</h1>
+	<p>Calculate sum of children values automaticaly with [=sum]</p>
+	<div id="gridbox" width="519px" height="220px" style="background-color:white;"></div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TreeGrid lines</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<link rel="stylesheet" type="text/css" href="../../../codebase/dhtmlx.css"/>
+	<script src="../../../codebase/dhtmlx.js"></script>
+	<script>
+		var myTreeGrid;
+		function doOnLoad() {
+			myTreeGrid = new dhtmlXGridObject('gridbox');
+			myTreeGrid.setImagePath("../../../codebase/imgs/");
+			myTreeGrid.enableTreeGridLines();
+			myTreeGrid.enableMultiselect(true);
+			myTreeGrid.enableAutoHeigth(true);
+			myTreeGrid.init();
+			myTreeGrid.setSkin("dhx_skyblue");
+			myTreeGrid.loadXML("../common/treegrid.xml");
+		}
+	</script>
+</head>
+<body onload="doOnLoad();">
+	<h1>TreeGrid lines</h1>
+	<p>You can set tree lines in treegrid by enableTreeGridLines method</p>
+	<table width="600">
+		<tr>
+			<td>
+				<div id="gridbox" width="100%" height="250px" style="background-color:white;"></div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div id="gridtbl1" width="100%" height="200px" style="background-color:white;"></div>
+				<br><br>
+				<div><a href="#" onclick="myTreeGrid.addRow((new Date()).valueOf(),['new row','text','text',1,0],0)">Add new row</a></div>
+				<div><a href="#" onclick="var z=myTreeGrid.getRowId(this.nextSibling.value); if (z) myTreeGrid.addRow((new Date()).valueOf(),['new row','text','text',1,1],0,z)">Add new row at child of node at position</a><input></div>
+				<div><a href="#" onclick="var z=myTreeGrid.getSelectedId(); if (z) myTreeGrid.addRow((new Date()).valueOf(),['new row','text','text',1,1],0,z)">Add new row as child of selected</a></div>
+				<div>&nbsp;</div>
+				<div><a href="#" onclick="var z=myTreeGrid.getRowId(this.nextSibling.value); if (z) myTreeGrid.deleteRow(z)">Delete row at position</a><input></div>
+				<div><a href="#" onclick="myTreeGrid.deleteSelectedItem()">Delete selected rows</a></div>
+			</td>
+		</tr>
+	</table>
+	<hr>
+	<div><a href="#" onclick="alert(myTreeGrid.getRowIndex(myTreeGrid.getSelectedId()))">Index of selected</a></div>
+	<div><a href="#" onclick="myTreeGrid.expandAll()">Expand all</a></div>
+	<div><a href="#" onclick="myTreeGrid.collapseAll()">Collapse all</a></div>
+</body>
+</html>
