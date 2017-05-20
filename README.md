@@ -1,22 +1,22 @@
 # Instruction
 
-## Mysql
+## Mysql
 - Start `brew services start mysql56`
 - DIR `/usr/local/Cellar/mysql@5.6/5.6.36_1`
 - PASS `./mysqladmin -u root password 1234`
 - DB `sheduler`
 
 
-## Create User
+## Create User
 
 - `php artisan make:migration users`
 
-## Dependencie
+## Dependencie
 
 - `"composer require httpoz/roles"`
 
 
-## PHP
+## PHP
 
 ```php
 
