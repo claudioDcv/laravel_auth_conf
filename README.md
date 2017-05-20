@@ -4,8 +4,8 @@
 - Start `brew services start mysql56`
 - DIR `/usr/local/Cellar/mysql@5.6/5.6.36_1`
 - PASS `./mysqladmin -u root password 1234`
-- DB `sheduler`
-
+- DB `scheduler`
+- Import `dhtmlx_samples.sql` to Database `scheduler`
 
 ## Create User
 
