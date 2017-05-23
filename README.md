@@ -16,6 +16,14 @@
 - `"composer require httpoz/roles"`
 
 
+
+
+##Library
+
+- https://httpoz.github.io/roles/ [Role & Group]
+- https://github.com/Jenssegers/Date [Date multilangue]
+- https://laravelcollective.com/docs/5.4/html#installation [Helper Form]
+
 ## PHP
 
 ```php
