@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Programador de Agenda Medica'),
 
     /*
     |--------------------------------------------------------------------------
@@ -182,6 +182,10 @@ return [
          */
         HttpOz\Roles\RolesServiceProvider::class,
 
+        Collective\Html\HtmlServiceProvider::class,
+
+        Jenssegers\Date\DateServiceProvider::class,
+
     ],
 
     /*
@@ -230,6 +234,11 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+
+        'Date' => Jenssegers\Date\Date::class,
 
     ],
 

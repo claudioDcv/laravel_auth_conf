@@ -59,7 +59,18 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
-
+                        <div class="form-group">
+                          <label for="password-confirm" class="col-md-4 control-label">Perfiles</label>
+                          <div class="col-md-6">
+                            @foreach ($roles as $rol)
+                            <div class="checkbox-inline">
+                              <label name="{{ $rol->slug }}">
+                                {!! Form::checkbox('roles[]', $rol->id) !!}{{ $rol->name }}
+                              </label>
+                            </div>
+                            @endforeach
+                          </div>
+                        </div>
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">

@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -12,7 +11,9 @@
 
     <!-- Styles -->
     <!-- <link rel="stylesheet" href="{{ asset('dhtmlxScheduler_v4.4.0/codebase/dhtmlxscheduler.css') }}" type="text/css"> -->
+    <link rel="stylesheet" href="{{ asset('font-awesome-4.7.0 2/css/font-awesome.min.css') }}">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -37,7 +38,11 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                      @role('admin')
+                      <li><a href="{{ route('scheduler') }}">Programador</a></li>
+                      <li><a href="{{ route('register') }}">Nuevo Usuario</a></li>
+                      <li><a href="{{ route('users') }}">Lista de Usuarios</a></li>
+                      @endrole
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -78,5 +83,6 @@
     <!-- Scripts -->
     <!-- <script src="{{ asset('dhtmlxScheduler_v4.4.0/codebase/dhtmlxscheduler.js') }}" type="text/javascript"></script> -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>

@@ -6,6 +6,9 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
+use \HttpOz\Roles\Models\Role;
 
 class RegisterController extends Controller
 {
@@ -34,9 +37,15 @@ class RegisterController extends Controller
      *
      * @return void
      */
+    // public function __construct()
+    // {
+    //     $this->middleware('guest');
+    // }
     public function __construct()
     {
-        $this->middleware('guest');
+        $roles = Role::get();
+        $this->middleware('auth');
+        //$this->middleware('guest');
     }
 
     /**
@@ -47,6 +56,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -54,6 +64,11 @@ class RegisterController extends Controller
         ]);
     }
 
+    public function showRegistrationForm()
+    {
+        $roles = Role::get();
+        return view('auth.register', ['roles' => $roles]);
+    }
     /**
      * Create a new user instance after a valid registration.
      *
@@ -67,5 +82,33 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $roles = Role::find($request->get('roles'));
+
+        $isMedic = false;
+        if (count($roles) > 0) {
+          foreach ($roles as $rol) {
+            if($rol->slug === 'medic'){
+              $isMedic = true;
+            }
+            $user->attachRole($rol);
+          }
+        }
+
+        if ($isMedic) {
+          return redirect()->route('user-view', $user->id);
+        }
+        //Esta linea loguea a los usuarios uando se registran
+        // $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
     }
 }

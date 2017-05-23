@@ -11,11 +11,11 @@
                        | Hola Admin
                   @endrole
                 </div>
+                {!! Form::open(['url' => 'foo/bar']) !!}
 
+                {!! Form::close() !!}
                 <div class="panel-body">
-                    @role('admin')
-                    <a href="{{ route('scheduler') }}">Programador</a>
-                    @endrole
+                    
                 </div>
             </div>
         </div>
