@@ -12,7 +12,8 @@
     <!-- Styles -->
     <!-- <link rel="stylesheet" href="{{ asset('dhtmlxScheduler_v4.4.0/codebase/dhtmlxscheduler.css') }}" type="text/css"> -->
     <link rel="stylesheet" href="{{ asset('font-awesome-4.7.0 2/css/font-awesome.min.css') }}">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('bootstrap-3.3.7-dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('datetimepicker/css/bootstrap-datetimepicker.css') }}">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -39,9 +40,15 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                       @role('admin')
-                      <li><a href="{{ route('scheduler') }}">Programador</a></li>
+                      <li><a href="{{ route('event.create') }}">Programador</a></li>
                       <li><a href="{{ route('register') }}">Nuevo Usuario</a></li>
+                      @endrole
+                      <li><a href="{{ route('event.index') }}">Programación</a></li>
+                      @role('admin|reservation')
                       <li><a href="{{ route('users') }}">Lista de Usuarios</a></li>
+                      @endrole
+                      @role('client')
+                      <li><a href="{{ route('my-hh') }}">Mis Horarios/Cliente</a></li>
                       @endrole
                     </ul>
 
@@ -81,8 +88,15 @@
     </div>
 
     <!-- Scripts -->
+    <script type='text/javascript' src="{{ asset('date.js') }}"></script>
+    <script type='text/javascript' src="{{ asset('jquery-2.0.0.js') }}"></script><!-- jquery-week-calendar-master/libs/jquery-1.4.4.min.js-->
+    <script src="{{ asset('function.js') }}" charset="utf-8"></script>
+    <script type='text/javascript' src="{{ asset('jquery-ui-1.12.1 2/jquery-ui.js') }}"></script><!-- jquery-week-calendar-master/libs/jquery-ui-1.8.11.custom.min.js-->
+    <script src="{{ asset('library/moment-with-locales.js') }}" charset="utf-8"></script>
+    <script src="{{ asset('datetimepicker/js/bootstrap-datetimepicker.min.js') }}" charset="utf-8"></script>
+    <script src="{{ asset('bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('main.js') }}" charset="utf-8"></script>
     <!-- <script src="{{ asset('dhtmlxScheduler_v4.4.0/codebase/dhtmlxscheduler.js') }}" type="text/javascript"></script> -->
-    <script src="{{ asset('js/app.js') }}"></script>
     @yield('scripts')
 </body>
 </html>

@@ -1,0 +1,399 @@
+html,body{
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+button.agregar-evento{
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  border: none;
+  background: hsl(207, 90%, 54%);
+  padding: 10px;
+  color: hsl(0, 0%, 100%);
+}
+#dia-calendario{
+  width: 70%;
+  margin: 0 0 0 170px;
+  height: 100%;
+  overflow: auto;
+}
+#dia{
+  padding-left: 180px;
+  font-size: 10px;
+  font-family: sans-serif;
+}
+#dia > div{
+  outline: solid 1px hsl(0, 0%, 85%);
+  position: relative;
+}
+#dia div.evento{
+  background-color: hsl(0, 0%, 92%);
+}
+#dia div.vacio{
+}
+#dia div p{
+  display: inline-block;
+  margin: 10px;
+  font-size: 12px;
+}
+
+.dia-show{
+  display: block;
+}
+.dia-hide{
+  display: none;
+}
+.dia-defecto-container{
+  background: hsla(0, 0%, 0%, 0.7);
+  z-index: 999;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.dia-defecto-ventana select.fecha,
+.dia-defecto-ventana input.fecha{
+  width: 50%;
+  border: solid 1px hsl(0, 0%, 27%);
+  height: 30px;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.dia-defecto-ventana input.title
+{
+  width: 100%;
+  border: none;
+  border-bottom: solid 2px hsl(0, 0%, 80%);
+  height: 30px;
+  padding: 15px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+
+.dia-defecto-ventana input.mensaje
+{
+  width: 100%;
+  border: none;
+  height: 30px;
+  padding: 0;
+  box-sizing: border-box;
+  color: hsl(0, 0%, 80%);
+}
+
+.dia-defecto-ventana{
+  background: hsla(0, 0%, 100%,1);
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 320px;
+  height: 250px;
+}
+.dia-defecto-head{
+  color: hsl(0, 0%, 27%);
+  font-size: 18px;
+  height: 40px;
+  width: 100%;
+  background: hsl(0, 0%, 94%);
+  border-bottom: solid 1px hsl(0, 0%, 59%);
+  font-family: sans-serif;
+  padding: 10px 15px;
+  box-sizing: border-box;      }
+.dia-defecto-body{
+  padding: 50px 10px 50px 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: hsla(0, 0%, 100%, 0);
+}
+.dia-defecto-footer{
+  height: 40px;
+  width: 100%;
+  background: hsl(0, 0%, 100%);
+  border-top: solid 1px hsl(0, 0%, 59%);
+  position: absolute;
+  bottom: 0;
+}
+.dia-btn{
+  border: solid 1px hsl(0, 0%, 85%);
+  position: relative;
+  display: inline-block;
+  background: hsl(0, 0%, 100%);
+  color: hsl(0, 0%, 52%);
+}
+.dia-btn-evento-contenedor{
+  outline: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 7px;
+}
+.dia-btn-ok{
+  background: hsl(199, 98%, 48%);
+  border: none;
+  height: 100%;
+  width: 50%;
+  color: hsl(0, 0%, 100%);
+}
+.dia-btn-nok{
+  background: hsl(4, 90%, 58%);
+  border: none;
+  height: 100%;
+  width: 50%;
+  color: hsl(0, 0%, 100%);
+}
+
+.dia-btn-del{
+  background: hsl(14, 100%, 57%);
+  border: hsl(4, 90%, 58%) 1px solid;
+  color: hsl(0, 0%, 100%);
+}
+
+
+
+
+/*# sourceMappingURL=app.css.map */
+.day-library>div{
+  width: 100%;
+  border: solid 1px hsl(0, 0%, 89%);
+  margin: 0;
+  padding: 0;
+  position: relative;
+  background:
+  linear-gradient(
+    to bottom,
+    hsl(0, 0%, 100%),
+    hsl(0, 0%, 100%) 50%,
+    hsl(0, 0%, 89%) 50%,
+    hsl(0, 0%, 89%)
+  );
+/* The rectangle in which to repeat.
+   It can be fully wide in this case */
+
+}
+.day-library>div>div{
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  height: 2px;
+}
+.day-library>div>div>div{
+  font-size: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.day-library>div>div.cell:nth-child(even){
+  background: hsl(0, 0%, 90%);
+}
+.day-library>div>div.cell:nth-child(odd){
+
+}
+.day-library>div .event{
+  position: absolute;
+  background: hsla(187, 71%, 82%, 0.51);
+  border-radius: 5px;
+  box-shadow: inset 0px 0 0px 1px #607D8B;
+}
+
+.day-library .event-title{
+  font-size: 10px;
+  margin: 4px;
+  background: hsl(45, 100%, 51%);
+  width: auto;
+  display: inline-block;
+  border-radius: 9px;
+  padding: 2px 5px;
+}
+
+
+
+
+
+#calendario{
+  width: 100%;
+  height: auto;
+  font-family:arial;
+}
+  #calendario .calendar-container-table{
+    top: 0px;
+    position: absolute;
+    display: block;
+    vertical-align: top;
+    width: 170px;
+    padding-left: 0;
+    left: 0px;
+  }
+    #calendario .calendar-container-horario{
+      display: block;
+      padding-left: 180px;
+      width: 100%;
+    }#calendario .calendar-container-horario table{
+        width: 100%;
+      }
+        #calendario .calendar-container-horario table > tr{
+          padding: 10px;
+          display: block;
+        }
+          #calendario .calendar-container-horario table tr.hora-completa{
+            background: hsl(0, 0%, 95%);
+          }#calendario .calendar-container-horario table tr.hora-media{
+
+            }
+            #calendario .calendar-container-horario table tr.red{
+              background:red;
+            }
+            #calendario .calendar-container-horario table tr.green{
+              background:green;
+          }#calendario td.mes-actual:hover{
+              background:grey;
+            }
+#calendario td.calendar-hoy{
+  color: hsl(187, 100%, 42%);
+}
+#calendario td.mes-distinto{
+  background: #cccccc;
+}
+#calendario td.dia-evento{
+  background:orange;
+  position:relative;
+}
+#calendario td.dia-evento span{
+  display: block;
+  transition: all 0.2s ease-in-out;
+  pointer-events:none;
+  opacity:0;
+  position:absolute;
+  width: 100%;
+  top: -80%;
+  border: solid 2px hsl(200, 18%, 26%);
+  left: 0;
+  right: 0;
+  border-radius: 12px;
+  text-align: center;
+}
+#calendario td.dia-evento:hover span{
+  transition: all 0.3s ease-in-out;
+  opacity:100;
+  background: inherit;
+  width: 100%;
+  top: -120%;
+}
+#calendario td.dia-evento span:hover{
+  background:hsl(200, 18%, 26%);
+  color:#FFFFFF;
+}
+#calendario td.dia-selected{
+  outline: hsl(199, 98%, 48%) solid 1px;
+}
+#calendario table.table-month{
+  font-size:16px;
+}
+#calendario table.table-month tr{
+
+}
+#calendario table.table-month tr td{
+  padding: 10px;
+}
+#calendario table.table-month tr td.actual-month{
+  font-weight: 800;
+}
+#calendario table.table-year{
+  font-size:16px;
+}
+#calendario table.table-year tr{
+
+}
+#calendario table.table-year tr td{
+  padding: 10px;
+}
+#calendario table.table-year tr td.actual-month{
+  font-weight: 800;
+}
+
+  #btn-container{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+  body,html{
+    width: 100%;
+}
+
+
+.trigger, #output {
+	padding: 1em;
+	margin: 0;
+}
+
+/*= Confirm Box */
+
+#confirm-wrapper {
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000000;
+	background: rgba( 204, 204, 204, 0.6 );
+	display: none;
+	transition: opacity .3s ease-in;
+}
+
+#confirm-box {
+	width: 300px;
+	background: #fff;
+	min-height: 500px;
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	margin: -100px 0 0 -150px;
+}
+
+#confirm-buttons {
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	bottom: 0;
+	left: 0;
+	padding-bottom: 1em;
+}
+
+#confirm-buttons button {
+	display: inline-block;
+	background: transparent;
+	color: #000;
+	font-size: 1em;
+	font-weight: bold;
+	cursor: pointer;
+	text-transform: uppercase;
+	border: 2px solid;
+	margin: 0 0.5em;
+	padding: 0.6em 0;
+	width: 120px;
+}
+
+#confirm-header {
+	text-align: center;
+	font-size: 1em;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin: 2.5em 0 1.5em 0;
+}
+
+#confirm-header:after {
+	content: ' ';
+	display: block;
+	width: 1em;
+	border-top: 1px solid;
+	margin: 0.4em auto;
+}

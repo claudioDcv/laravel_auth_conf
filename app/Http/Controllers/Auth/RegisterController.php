@@ -59,6 +59,8 @@ class RegisterController extends Controller
 
         return Validator::make($data, [
             'name' => 'required|string|max:255',
+            'rut' => 'required|string|max:11|unique:users',
+            'hh_value' => 'required|integer',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -79,6 +81,8 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            'rut' => $data['rut'],
+            'hh_value' => $data['hh_value'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
@@ -90,7 +94,7 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
-        $roles = Role::find($request->get('roles'));
+        $roles = Role::find($request->get('to'));
 
         $isMedic = false;
         if (count($roles) > 0) {
@@ -103,9 +107,9 @@ class RegisterController extends Controller
         }
 
         if ($isMedic) {
-          return redirect()->route('user-view', $user->id);
+          return redirect()->route('user-view-asigns-specialities', $user->id);
         }
-        //Esta linea loguea a los usuarios uando se registran
+        //Esta linea loguea a los usuarios cuando se registran
         // $this->guard()->login($user);
 
         return $this->registered($request, $user)

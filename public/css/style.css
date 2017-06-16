@@ -5,8 +5,89 @@
 .tags li{
   display: inline-block;
   background: #2196F3;
-  padding: 2px 10px;
-  margin: 0 5px;
+  padding: 1px 7px;
+  margin: 2px 2px;
   color: white;
+  font-size: 12px;
   border-radius: 15px;
+}
+.tags-medic li{
+  background: #4CAF50;
+}
+#select-medical-specialities select{
+  margin-top: 5px;
+}
+
+#select-medical-specialities .col-xs-2{
+  padding: 0;
+}
+#select-medical-specialities .col-xs-5{
+
+}
+.datepicker td, .datepicker span{
+  border-radius: 0 !important;
+}
+.datepicker td.disabled{
+  background: #eeeeee !important;
+}
+.datepicker span.disabled{
+  background: #eeeeee !important;
+}
+#calendar *,
+#calendar *:after,
+#calendar *:before,
+#calendar tr,
+#calendar td,
+#calendar div,
+#calendar a,
+#calendar span,
+#calendar table,
+#calendar h1,
+#calendar tbody,
+.wc-grid-timeslot-header,
+.wc-grid-row-events,
+.wc-time-slots,
+.wc-time-slots tbody,
+.ui-widget-content,
+.wc-header{
+  box-sizing: content-box !important;
+}
+#calendar  {
+  font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+  margin: 0;
+}
+
+#calendar h1 {
+  margin: 0;
+  padding: 0.5em;
+}
+
+#calendar p.description {
+  font-size: 0.8em;
+  padding: 0 1em 1em;
+  margin: 0;
+}
+
+#calendar #message {
+  font-size: 0.7em;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 350px;
+  display: none;
+  padding: 1em;
+  background: #ffc;
+  border: 1px solid #dda;
+}
+.form-control.date{
+  background: white !important;
+}
+.row-margin > div{
+  margin-bottom: 10px;
+}
+.no-label{
+  padding-top: 25px;
+}
+.modal-dialog{
+  z-index: 99999;
 }

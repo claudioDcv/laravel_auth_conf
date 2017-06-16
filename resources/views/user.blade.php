@@ -12,13 +12,14 @@
                   @endrole
                 </div>
                 <div class="panel-body table-responsive">
-                  <table class="table">
+                  <table class="table table-hover table-sm table-bordered">
                     <thead>
                       <tr>
                         <th>#</th>
                         <th>Email</th>
                         <th>Nombre</th>
                         <th>Rol</th>
+                        <th>Especialidad</th>
                         <th>Acciones</th>
                       </tr>
                     </thead>
@@ -37,11 +38,24 @@
                             @endforeach
                           </ul>
                         </td>
+                        @if (count($user->medicalspecialties) > 0)
+                        <td>
+                          <ul class="tags tags-medic">
+                            @foreach ($user->medicalspecialties as $m)
+                              <li>{{ $m->name }}</li>
+                            @endforeach
+                          </ul>
+                        </td>
+                        @else
+                          <td></td>
+                        @endif
                         <td style="white-space: nowrap;">
                           <div class="btn-group">
-                            <a href="{{ route('user-view',$user->id) }}" class="text-primary"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            <a href="{{ route('user-view', ['id' => $user->id, 'page' => $users->currentPage()]) }}" class="text-primary"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            @role('admin')
                             <a href="#" class="text-success"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                             <a href="#" class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            @endrole
                           </div>
                         </td>
                       </tr>

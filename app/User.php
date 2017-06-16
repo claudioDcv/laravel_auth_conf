@@ -17,7 +17,7 @@ class User extends Authenticatable implements HasRoleContract
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','rut','hh_value'
     ];
 
     /**
@@ -32,6 +32,11 @@ class User extends Authenticatable implements HasRoleContract
     public function medicalspecialties(){
         return $this->belongsToMany('\App\Medicalspecialty','medicalspecialty_user');
             //->withPivot();
+    }
+
+    public function med()
+    {
+        return $this->belongsToMany('\App\Medicalspecialty', 'medicalspecialty_user')->withPivot('medicalspecialty_id');
     }
     // public function roles(){
     //     return $this->belongsToMany('\App\Task','menu_task_user')
