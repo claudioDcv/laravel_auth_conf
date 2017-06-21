@@ -16,6 +16,12 @@
               <div class="row">
                 <div class='col-sm-12'>
                     <div class="form-group">
+                      <div class="btn btn-danger" id="delete">Eliminar</div>
+                    </div>
+                  </div>
+
+                <div class='col-sm-12'>
+                    <div class="form-group">
                       <label for="sel1">Medico</label>
                       <input class="form-control" type="text" readonly name="m" value="{{ $medic->name }}">
                       <input class="form-control" type="hidden" name="medic" value="{{ $medic->id }}">
@@ -59,13 +65,15 @@
                       'title' : 'Inicio',
                       'icon' : 'fa fa-calendar'
                     ])
-                    @input([
-                      'type' : 'text',
-                      'col' : 6,
-                      'name' : 'date_end',
-                      'title' : 'Fin',
-                      'icon' : 'fa fa-calendar'
-                     ])
+                    <div class="hidden">
+                      @input([
+                        'type' : 'text',
+                        'col' : 6,
+                        'name' : 'date_end',
+                        'title' : 'Fin',
+                        'icon' : 'fa fa-calendar'
+                       ])
+                    </div>
                       <!-- <div class="col-md-12">
                         <div class="form-group">
                           <div class="radio-inline">
@@ -94,4 +102,14 @@
     </div>
   </div>
 </div>
+<script>
+var deleteButton = document.getElementById('delete');
+deleteButton.addEventListener('click',function(e){
+  var id = document.getElementById('event-id').value;
+  if (confirm('Confirma la eliminación?')) {
+    console.log(id);
+    window.location.href = '/week-event/delete/' + id + '?return='+window.location.href;
+  }
+});
+</script>
 <!-- END MODAL -->

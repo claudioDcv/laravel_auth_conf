@@ -26,6 +26,9 @@ class Event extends Model
   public function status() {
       return $this->belongsTo('App\Status');
   }
+  public function medspec() {
+      return $this->belongsTo('App\Medicalspecialty', 'medspec_id');
+  }
   public function medic() {
       return $this->belongsTo('App\User');
   }

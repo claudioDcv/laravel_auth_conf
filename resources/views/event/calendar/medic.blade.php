@@ -12,22 +12,20 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Calendario Medico Profesional</div>
                 @include('event.calendar.modalmedic')
+                <input type="hidden" value="{{ Auth::user()->id }}" readonly class="form-control" name="" id="ajax-medic" />
                 <div class="panel-body">
                     <div class="row row-margin">
                       <div class="col-md-12">
                       </div>
                     </div>
                     <div class="row row-margin">
-                      <div class="col-md-3">
+                      <div class="col-md-6">
                         <label>Especialidad</label>
                         <select name="" id="ajax-specialities"  class="form-control" required>
                           <option disabled selected>Seleccione Opción</option>
-                        </select>
-                      </div>
-                      <div class="col-md-3">
-                        <label>Medico</label>
-                        <select name="" id="ajax-medic" class="form-control" required>
-                          <option disabled selected>Seleccione Opción</option>
+                          @foreach (Auth::user()->medicalspecialties as $m)
+                          <option value="{{ $m->id }}">{{ $m->name }}</option>
+                          @endforeach
                         </select>
                       </div>
                       <div class="col-md-3">
@@ -113,7 +111,7 @@ $(window).load(function() {
   var calendar = $('#calendar').weekCalendar({
     readonly: true,
     apiSave: 'jquery-week-calendar/save',
-    data: '/week-event/{{ $user->id }}',
+    data: '/week-event/{{ $user->id }}/'+ userMedicalSpeciality,
     date: Date.parse('{{ $date }}'),
     switchDisplay: {'1 dia': 1,'3 dias': 3,'Semana Trabajo': 5, 'Toda la Semana': 7},
     timeslotsPerHour: 4,
@@ -127,8 +125,8 @@ $(window).load(function() {
     },
     eventRender: function(calEvent, $event) {
       currentEvent.data[calEvent.id] = calEvent;
-      var template = '<div>' + (calEvent.description || '') + '</div>';
-      template += '<button type="button" data-id="' + calEvent.id +'" class="btn btn-primary modal-edit" data-toggle="modal" data-target="#modalEdit" data-whatever="@mdo">Editar</button>';
+      var template = '<div>' + '<button type="button" data-id="' + calEvent.id +'" class="btn btn-primary modal-edit" data-toggle="modal" data-target="#modalEdit" data-whatever="@mdo">Editar</button>' + (calEvent.description || '') + '</div>';
+      //template += '<button type="button" data-id="' + calEvent.id +'" class="btn btn-primary modal-edit" data-toggle="modal" data-target="#modalEdit" data-whatever="@mdo">Editar</button>';
       template += '<div>' + (calEvent.status ? calEvent.status.name : '') + '</div>';
       template += '<div>Medico: ' + (calEvent.users ? calEvent.users.name : '' ) + '</div>';
       template += '<div>Cliente: ' + (calEvent.client ? calEvent.client.name : '' ) + '</div>';
@@ -141,6 +139,33 @@ $(window).load(function() {
           border:'1px solid #888'
         });
       }
+      if (calEvent.medspec_id !== userMedicalSpeciality) {
+        $event.css('opacity','.2');
+        $event.css('pointer-events','none');
+      }
+      if (!calEvent.client_id) {
+        $event.css('opacity','.2');
+        $event.css('pointer-events','none');
+      }
+      if (calEvent.client_id && calEvent.medspec_id !== userMedicalSpeciality) {
+        $event.css('opacity','1');
+        $event.css('pointer-events','none');
+        $event.css({
+          backgroundColor: '#999',
+          border:'1px solid #888'
+        });
+      }
+      // if (calEvent.status_id == 2 && calEvent.client_id && calEvent.medspec_id == userMedicalSpeciality) {
+      //   $event.css('opacity','.6');
+      //   $event.css('pointer-events','none');
+      //   $event.css({
+      //     backgroundColor: 'red',
+      //   });
+      // }
+      // if (calEvent.client_id && !calEvent.status_id !== 3) {
+      //   $event.css('opacity','1');
+      //   $event.css('pointer-events','inherit');
+      // }
     },
     eventNew: function(calEvent, $event) {
       var businessHours = arguments[5];
@@ -270,14 +295,14 @@ $(window).load(function() {
     var select = document.getElementById('ajax-medic');
     select.innerHTML = '';
     select.innerHTML = '<option value="0" disabled selected>Seleccione Opción</option>';
-    data.forEach(function(e){
-      var option = document.createElement('option');
-      var txt = document.createTextNode(e.name);
-      option.value = e.id;
-      option.selected = userId === e.id;
-      option.appendChild(txt);
-      select.appendChild(option);
-    });
+    // data.forEach(function(e){
+    //   var option = document.createElement('option');
+    //   var txt = document.createTextNode(e.name);
+    //   option.value = e.id;
+    //   option.selected = userId === e.id;
+    //   option.appendChild(txt);
+    //   select.appendChild(option);
+    // });
   }
   var loadMedic = function(id){
     var xmlHttp = new XMLHttpRequest();
@@ -300,39 +325,39 @@ $(window).load(function() {
       loadMedic(e.target.value);
     })
   }
-  var loadSpecialities = function(){
-    var xmlHttp = new XMLHttpRequest();
-    var isChange = false;
-    var id = 0;
-        xmlHttp.onreadystatechange = function()
-        {
-            if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
-            {
-                var data = JSON.parse(xmlHttp.responseText);
-                var select = document.getElementById('ajax-specialities');
-                data.forEach(function(e){
-                  var option = document.createElement('option');
-                  var txt = document.createTextNode(e.name);
-                  option.value = e.id;
-                  option.selected = userMedicalSpeciality === e.id;
-                  if (option.selected) {
-                    isChange = true;
-                    id = e.id;
-                  }
-                  option.appendChild(txt);
-                  select.appendChild(option);
-                });
-
-                if (isChange) {
-                  loadMedic(id);
-                }
-                listenSelectSpecialities();
-            }
-        }
-        xmlHttp.open("get", "{{ route('medic-specialities-json') }}");
-        xmlHttp.send();
-  }
-  loadSpecialities();
+  // var loadSpecialities = function(){
+  //   var xmlHttp = new XMLHttpRequest();
+  //   var isChange = false;
+  //   var id = 0;
+  //       xmlHttp.onreadystatechange = function()
+  //       {
+  //           if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
+  //           {
+  //               var data = JSON.parse(xmlHttp.responseText);
+  //               var select = document.getElementById('ajax-specialities');
+  //               data.forEach(function(e){
+  //                 var option = document.createElement('option');
+  //                 var txt = document.createTextNode(e.name);
+  //                 option.value = e.id;
+  //                 option.selected = userMedicalSpeciality === e.id;
+  //                 if (option.selected) {
+  //                   isChange = true;
+  //                   id = e.id;
+  //                 }
+  //                 option.appendChild(txt);
+  //                 select.appendChild(option);
+  //               });
+  //
+  //               if (isChange) {
+  //                 loadMedic(id);
+  //               }
+  //               listenSelectSpecialities();
+  //           }
+  //       }
+  //       xmlHttp.open("get", "{{ route('medic-specialities-json') }}");
+  //       xmlHttp.send();
+  // }
+  // loadSpecialities();
   buttonAction();
 
 });

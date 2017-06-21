@@ -6,7 +6,16 @@ use Carbon\Carbon;
 use App\Event as Event;
 class WeekCalendar extends Controller
 {
-    public function event($id, Request $request){
+    public function deleteEvent($id) {
+      $event = Event::find($id);
+      $result = '';
+      if ($event) {
+        $result = ['delete' => $event->delete()];
+      }
+      $result = ['delete' => false];
+      return back()->withInput();
+    }
+    public function event($id, $id_spec, Request $request){
 
       $user = \Auth::user();
 
@@ -25,10 +34,10 @@ class WeekCalendar extends Controller
         $end = Carbon::createFromTimestamp($request->input('end'));
         $event = Event::
         where('user_id',$id)
-        ->where('status_id',2)
+        //->where('status_id',2)
         ->whereBetween('start', array($start, $end))
-        ->with('client')
-        ->whereNotNull('client_id')
+        //->with('client')
+        //->whereNotNull('client_id')
         ->with('status')->with('users')->get();
         return $event;
       }
@@ -38,6 +47,7 @@ class WeekCalendar extends Controller
         $end = Carbon::createFromTimestamp($request->input('end'));
         $event = Event::
         where('user_id',$id)
+        ->where('medspec_id',$id_spec)
         ->where('status_id',1)
         ->whereBetween('start', array($start, $end))
         ->with('status')
@@ -72,6 +82,7 @@ class WeekCalendar extends Controller
         $event->title = $request->input('title');
         $event->user_id = $request->input('user_id');
         $event->status_id = $request->input('status_id');
+        $event->medspec_id = $request->input('medspec_id');
         $event->is_active = $request->input('is_active');
         $event->description = $request->input('description');
         $event->start = Carbon::createFromFormat('d/m/Y H:i:s', $request->input('start'));
@@ -80,6 +91,7 @@ class WeekCalendar extends Controller
         return Event::find($event->id);
       }else{
         $event->title = $request->input('title');
+        $event->medspec_id = $request->input('medspec_id');
         $event->description = $request->input('description');
         $event->start = Carbon::createFromFormat('d/m/Y H:i:s', $request->input('start'));
         $event->end = Carbon::createFromFormat('d/m/Y H:i:s', $request->input('end'));

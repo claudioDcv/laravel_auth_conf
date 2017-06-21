@@ -98,7 +98,7 @@ $(window).load(function() {
     e['_token'] = _token;
     e.start = dateBackEnd(n.start);
     e.end = dateBackEnd(n.end);
-
+    e.medspec_id = userMedicalSpeciality;
     $.ajax({
           url: '/week-event/save',
           type: 'post',
@@ -113,7 +113,7 @@ $(window).load(function() {
   var _token = '{{ csrf_token() }}';
   var calendar = $('#calendar').weekCalendar({
     apiSave: 'jquery-week-calendar/save',
-    data: '/week-event/{{ $medicId }}',
+    data: '/week-event/{{ $medicId }}/'+ userMedicalSpeciality,
     date: Date.parse('{{ $date }}'),
     switchDisplay: {'1 dia': 1,'3 dias': 3,'Semana Trabajo': 5, 'Toda la Semana': 7},
     timeslotsPerHour: 4,
@@ -124,23 +124,36 @@ $(window).load(function() {
     shortDays: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
     longDays: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
     height: function($calendar) {
-      return $(window).height() - $('h1').outerHeight() - $('.description').outerHeight();
+      return $(window).height() - $('h1').outerHeight() - $('.description').outerHeight() +100;
     },
     eventRender: function(calEvent, $event) {
       currentEvent.data[calEvent.id] = calEvent;
-      var template = '<div>' + (calEvent.description || '') + '</div>';
-      template += '<button type="button" data-id="' + calEvent.id +'" class="btn btn-primary modal-edit" data-toggle="modal" data-target="#modalEdit" data-whatever="@mdo">Editar</button>';
+      // $event.attr('data-toggle','modal');
+      // $event.attr('data-target','#modalEdit');
+      // $event.attr('data-toggle','modal');
+      // $event.attr('data-id',calEvent.id);
+      //$event.clasName = 'wc-cal-event ui-corner-all ui-resizable ui-draggable';
+      var template = '<div>Descripción: ' + (calEvent.description || '') + '</div><hr>';
+      var button = '<button type="button" data-id="' + calEvent.id +'" class="btn btn-primary modal-edit" data-toggle="modal" data-target="#modalEdit" data-whatever="@mdo">Editar</button>';
       template += '<div>' + (calEvent.status ? calEvent.status.name : '') + '</div>';
       template += '<div>Medico: ' + (calEvent.users ? calEvent.users.name : '' ) + '</div>';
       template += '<div>Cliente: ' + (calEvent.client ? calEvent.client.name : '' ) + '</div>';
       template += '<div>Cliente Mail: ' + (calEvent.client ? calEvent.client.email : '' ) + '</div>';
-      $event.html($event.html() + template);
+      $event.html(button + $event.html() + template);
+      var a = $event.find('.wc-time');
+      // a.html('<p>hhoo</p>');
+      //a.innerHTML += button;
+      // console.log($event);
       if (calEvent.end.getTime() < new Date().getTime()) {
         $event.css('backgroundColor', 'red');
         $event.find('.time').css({
           backgroundColor: '#999',
           border:'1px solid #888'
         });
+      }
+      if (calEvent.medspec_id !== userMedicalSpeciality) {
+        $event.css('opacity','.2');
+        $event.css('pointer-events','none');
       }
     },
     eventNew: function(calEvent, $event) {
@@ -220,15 +233,15 @@ $(window).load(function() {
               viewMode: 'years',
               // format: 'DD/MM/YYYY'
           });
-      $('#date_end').datetimepicker({
-          useCurrent: false, //Important! See issue #1075
-      });
-      $("#date_start").on("dp.change", function (e) {
-          $('#date_end').data("DateTimePicker").minDate(e.date);
-      });
-      $("#date_end").on("dp.change", function (e) {
-          $('#date_start').data("DateTimePicker").maxDate(e.date);
-      });
+      // $('#date_end').datetimepicker({
+      //     useCurrent: false, //Important! See issue #1075
+      // });
+      // $("#date_start").on("dp.change", function (e) {
+      //     $('#date_end').data("DateTimePicker").minDate(e.date);
+      // });
+      // $("#date_end").on("dp.change", function (e) {
+      //     $('#date_start').data("DateTimePicker").maxDate(e.date);
+      // });
 
   document.getElementById('calendar').addEventListener('click',function(e){
     if (e.target.className === 'btn btn-primary modal-edit') {
@@ -238,8 +251,17 @@ $(window).load(function() {
         $('#event-status option:eq('+elm.status_id+')').prop('selected', true);
         document.getElementById('description').value = elm.description;
         $('#date_start').data('DateTimePicker').date(new Date(elm.start));
-        $('#date_end').data('DateTimePicker').date(new Date(elm.end));
+        // $('#date_end').data('DateTimePicker').date(new Date(elm.end));
     }
+    // else if (e.target.parentNode.dataset.id) {
+    //     var elm = currentEvent.data[e.target.parentNode.dataset.id];
+    //     document.getElementById('event-id').value = elm.id;
+    //     document.getElementById('title').value = elm.title;
+    //     $('#event-status option:eq('+elm.status_id+')').prop('selected', true);
+    //     document.getElementById('description').value = elm.description;
+    //     $('#date_start').data('DateTimePicker').date(new Date(elm.start));
+    //     $('#date_end').data('DateTimePicker').date(new Date(elm.end));
+    // }
   });
 
   function displayMessage(message) {

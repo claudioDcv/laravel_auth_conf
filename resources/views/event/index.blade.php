@@ -4,7 +4,9 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Listado de Medicos</div>
+                <div class="panel-heading">Listado de Medicos
+                </div>
+                @if (count(Auth::user()->medicalspecialties) < 1)
                 <div class="panel-body">
                     <hr>
                     <select name="" id="ajax-specialities"  class="form-control" required>
@@ -19,6 +21,20 @@
                     <hr>
                     <button class="btn btn-success" id="button-show-calendar">Calendario</button>
                 </div>
+                @else
+                <div class="panel-body">
+                  <select name="" id="ajax-specialities"  class="form-control" required>
+                    <option disabled selected value="0">Seleccione Opción</option>
+                    @foreach (Auth::user()->medicalspecialties as $m)
+                    <option value="{{ $m->id }}">{{ $m->name }}</option>
+                    @endforeach
+                  </select>
+                  <hr />
+                  <input type="text" class="date form-control" name="date" id="date-calendar-medic" />
+                  <hr />
+                  <button class="btn btn-success" id="button-show-calendar">Calendario</button>
+                </div>
+                @endif
             </div>
         </div>
     </div>
@@ -29,6 +45,7 @@
 <script src="{{ asset('js/jquery3.js')}}" charset="utf-8"></script>
 <script src="{{ asset('library/moment-with-locales.js') }}" charset="utf-8"></script>
 <script src="{{ asset('datetimepicker/js/bootstrap-datetimepicker.min.js') }}" charset="utf-8"></script>
+@if (count(Auth::user()->medicalspecialties) < 1)
 <script type="text/javascript">
     $(function () {
       $.fn.datetimepicker.defaults.icons = {
@@ -134,4 +151,47 @@
 
     });
 </script>
+@else
+<script type="text/javascript">
+    $(function () {
+      $.fn.datetimepicker.defaults.icons = {
+        time: 'fa fa-clock-o',
+        date: 'fa fa-calendar',
+        up: 'fa fa-chevron-up',
+        down: 'fa fa-chevron-down',
+        previous: 'fa fa-chevron-left',
+        next: 'fa fa-chevron-right',
+        today: 'fa fa-dot-circle-o',
+        clear: 'fa fa-trash',
+        close: 'fa fa-times'
+      };
+      $('.date').datetimepicker({
+          viewMode: 'years',
+          format: 'DD/MM/YYYY',
+          defaultDate: new Date(),
+      });
+
+      var buttonAction = function(){
+        var btn = document.getElementById('button-show-calendar');
+        btn.addEventListener('click', function(e){
+          var url = "{{ route('medic-event-list',['11','22','3333'])}}";
+          var medic = '{{ Auth::user()->id }}';
+          var medicalspecialty = document.getElementById('ajax-specialities');
+          if (parseInt(medicalspecialty.value, 10) === 0) {
+            alert('Seleccione una especialidad');
+            return;
+          }
+          var date = document.getElementById('date-calendar-medic');
+          var urlCreate = url.replaceArray(
+            ['11','22','3333'],
+            [medic, medicalspecialty.value, date.value.replaceAll('/','-')],
+          );
+          window.location.href = urlCreate;
+        })
+      }
+      buttonAction();
+
+    });
+</script>
+@endif
 @endsection

@@ -186,6 +186,8 @@ return [
 
         Jenssegers\Date\DateServiceProvider::class,
 
+        Encore\Admin\Providers\AdminServiceProvider::class
+
     ],
 
     /*

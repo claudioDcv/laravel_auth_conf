@@ -78,8 +78,20 @@ class EventController extends Controller
       $event->title = $request->input('title');
       $event->description = $request->input('description');
       // $event->is_active = $request->input('is_active') === 'on' ? true : false;
+
+      $originalStart = clone new \DateTime($event->start);
       $event->start = new \DateTime($request->input('date_start'));
-      $event->end = new \DateTime($request->input('date_end'));
+      $outStart = clone new \DateTime($request->input('date_start'));
+
+        $originalEnd = clone new \DateTime($event->end);
+        $diff = $originalStart->diff($originalEnd);
+        //return dd($diff,$outStart->add($diff));
+
+        //$end->modify('+15 minutes');
+        $event->end = $outStart->add($diff);
+        //$event->end = date('Y-m-d H:i',strtotime('+1 minutes',strtotime($event->start)));
+
+      //new \DateTime($request->input('date_end'));
       $event = $event->save();
       $d = Carbon::instance(new \DateTime($request->input('date_start')));
 

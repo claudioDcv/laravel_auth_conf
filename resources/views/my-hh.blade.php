@@ -19,6 +19,7 @@
                           <th>Descripción</th>
                           <th>Fecha</th>
                           <th>Medico</th>
+                          <th>Especialidad</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -27,12 +28,14 @@
                           <td>{{ $event->id }}</td>
                           <td>{{ $event->title }}</td>
                           <td>{{ $event->description }}</td>
-                          <td>{{ $event->start }}</td>
+                          <td style="white-space: nowrap;">{{ $event->start }}</td>
                           <td>{{ $event->users->name }}</td>
+                          <td>{{ $event->medspec->name }}</td>
                         </tr>
                       @endforeach
                       </tbody>
                     </table>
+                    {{ $events->appends(Request::except('page'))->links() }}
                   </div>
                 </div>
             </div>

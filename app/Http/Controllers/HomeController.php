@@ -40,7 +40,7 @@ class HomeController extends Controller
 
     public function myHH() {
       $user = \Auth::user();
-      $events = Event::where('client_id', $user->id)->get();
+      $events = Event::where('client_id', $user->id)->orderBy('updated_at', 'desc')->paginate(10);
       // return dd($events);
       return view('my-hh', [
         'events' => $events,

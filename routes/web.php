@@ -80,13 +80,17 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
 // Calendar
-Route::get('week-event/{id}', 'WeekCalendar@event')
+Route::get('week-event/{id}/{id_spec}', 'WeekCalendar@event')
   ->where(array(
     'id' => '[0-9]+',
+  ))
+  ->where(array(
+    'id_spec' => '[0-9]+',
   ))
   ->name('WCEvent')
   ->middleware('role:admin|reservation|medic|client');
 Route::post('week-event/save', 'WeekCalendar@save')->name('WCEvent')->middleware('role:admin');
+Route::get('week-event/delete/{id}', 'WeekCalendar@deleteEvent')->name('DeleteEvent')->middleware('role:admin');
 
 
 // Users

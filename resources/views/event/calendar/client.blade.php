@@ -114,7 +114,7 @@ $(window).load(function() {
   var calendar = $('#calendar').weekCalendar({
     readonly: true,
     apiSave: 'jquery-week-calendar/save',
-    data: '/week-event/{{ $medicId }}',
+    data: '/week-event/{{ $medicId }}/'+ userMedicalSpeciality,
     date: Date.parse('{{ $date }}'),
     switchDisplay: {'1 dia': 1,'3 dias': 3,'Semana Trabajo': 5, 'Toda la Semana': 7},
     timeslotsPerHour: 4,

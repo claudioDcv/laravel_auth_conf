@@ -11,6 +11,16 @@
                        | Hola Admin
                   @endrole
                 </div>
+                <div class="col-md-12">
+                  <hr/>
+                  <form class="" action="{{ Request::fullUrl() }}" method="get">
+                    <div class="form-inline">
+                      <input autofocus type="text" name="q" value="{{ Request::input('q') }}" class="form-control">
+                      <input type="submit" name="" value="Buscar" class="btn btn-success">
+                    </div>
+                  </form>
+                  <hr/>
+                </div>
                 <div class="panel-body table-responsive">
                   <table class="table table-hover table-sm table-bordered">
                     <thead>
@@ -24,6 +34,11 @@
                       </tr>
                     </thead>
                     <tbody>
+                    @if(count($users) < 1)
+                      <tr>
+                        <td colspan="5">No se encontraron resultados</td>
+                      </tr>
+                    @endif
                     @foreach($users as $user)
                       <tr>
                         <td>{{ $user->id }}</td>
@@ -53,8 +68,8 @@
                           <div class="btn-group">
                             <a href="{{ route('user-view', ['id' => $user->id, 'page' => $users->currentPage()]) }}" class="text-primary"><i class="fa fa-eye" aria-hidden="true"></i></a>
                             @role('admin')
-                            <a href="#" class="text-success"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                            <a href="#" class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            <!-- <a href="#" class="text-success"><i class="fa fa-pencil" aria-hidden="true"></i></a> -->
+                            <!-- <a href="#" class="text-danger"><i class="fa fa-trash" aria-hidden="true"></i></a> -->
                             @endrole
                           </div>
                         </td>

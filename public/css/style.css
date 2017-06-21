@@ -91,3 +91,28 @@
 .modal-dialog{
   z-index: 99999;
 }
+
+.ui-icon{display: none !important;}
+
+.wc-cal-event button{
+  font-size: 9px !important;
+    width: 40px !important;
+    border-radius: 7px !important;
+    text-align: center !important;
+    margin: 0px 0 0px 0 !important;
+    padding: 0 !important;
+    background: #5cb85c !important;
+    border: none !important;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}
+.wc-cal-event .wc-time {
+    background-color: #2b72d0 !important;
+    border: 1px solid #1b62c0 !important;
+    color: #fff !important;
+    padding: 0 !important;
+    font-weight: bold !important;
+    font-size: 10px !important;
+    padding: 0 46px 0 0 !important;
+}
